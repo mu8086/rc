@@ -3,8 +3,14 @@ defscrollback 50000
 termcapinfo xterm ti@:te@
 termcapinfo xterm-color ti@:te@
 hardstatus alwayslastline
+
+# default
+#hardstatus string '%{gk}[%{G}%H%{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}]%{=b C}[%m/%d/%y %C %A]%{W}'
+
 #hardstatus string '%{gk}[%{G}%H%{g}][%L= %{wk}%?%-w%45L>%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+w%?%?%-15=%{g}]%{=b C}[%m/%d %c]%{W}'
-hardstatus string '%{gk}[%{G}%H%{g}][ %L=%{kw}%?%-w%45L>%?%{=b KY} %n %{=b YK} %t %?(%u)%?%{= wk}%?%+w%?%-15=%{kg} ]%{=b C}[%m/%d %c]%{W}'
+
+hardstatus string '%{GK} %H %{kw} %L=%-w%45L>%{YK} %n %{KY} %t %{kw}%+w%-14= %{GK} %m/%d %c %{W}'
+
 vbell off
 shell bash
 shelltitle " "
@@ -32,25 +38,7 @@ bind *	select 18
 bind (	select 19
 bind )	select 20
 
-screen 1
-screen 2
-screen 3
-screen 4
-screen 5
-screen 6
-screen 7
-screen 8
-screen 9
-screen 10
-screen 11
-screen 12
-screen 13
-screen 14
-screen 15
-
-next
-next
-select 1
+#screen 1
 
 bindkey -k k5 source /root/.screenrc
 bindkey -k k7 xon
