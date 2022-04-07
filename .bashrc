@@ -161,3 +161,5 @@ export LESS_TERMCAP_ue=$'\e[0m'				# end underline
 #export LESS_TERMCAP_us=$'\e[04;38;5;146m'	# begin underline
 export LESS_TERMCAP_us=$'\e[38;5;209m'		# fg orange
 
+export PROMPT_COMMAND=                                 # stop GNU-screen auto-title
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
