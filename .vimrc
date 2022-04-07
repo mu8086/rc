@@ -41,23 +41,22 @@ highlight Search ctermfg=White ctermbg=DarkBlue
 
 "Word Wrap
 set wrap
-set linebreak
+set nolinebreak
+set paste
 
 "Tab
-set softtabstop=8
-set tabstop=8
-set shiftwidth=8
-set noexpandtab
+set softtabstop=4
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 set confirm
 set history=100
 
 if has("autocmd")
-"設定skeleton
 "autocmd BufNewFile *.c 0r ~/.vim/skeleton.c
 "autocmd BufNewFile *.cpp 0r ~/.vim/skeleton.cpp
 "autocmd BufNewFile Makefile 0r ~/.vim/skeleton.makefile
-"游標自動移到最後編輯離開的位置
 autocmd BufRead *.txt set tw=78
 autocmd BufReadPost *
 \   if line("'\"") > 0 && line ("'\"") <= line("$") |
@@ -131,7 +130,55 @@ nnoremap <silent> <C-L> :set list!<CR>
 
 nnoremap <silent> <C-P> :echo expand('%:p')<CR>
 
+map [1~ <Home>
+map [4~ <End>
+imap [1~ <Home>
+imap [4~ <End>
+
 noremap  <buffer> <silent> k gk
 noremap  <buffer> <silent> j gj
 noremap  <buffer> <silent> 0 g0
 noremap  <buffer> <silent> $ g$
+
+command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+		\ | wincmd p | diffthis
+
+
+" hi TabLine term=underline cterm=underline ctermfg=15 ctermbg=242 gui=underline guibg=DarkGrey
+hi TabLine cterm=none ctermfg=White ctermbg=242
+hi TabLineNr ctermfg=242 ctermbg=White
+
+" hi TabLineSel term=bold cterm=bold gui=bold
+hi TabLineSel ctermfg=White ctermbg=26
+hi TabLineSelNr ctermfg=26 ctermbg=White
+
+" hi TabLineFill term=reverse cterm=reverse gui=reverse
+hi TabLineFill ctermfg=Black ctermbg=White
+
+function MyTabLine()
+    let s = ''
+    for i in range(tabpagenr('$'))
+	let s .= '%#TabLineFill#  '
+	" select the highlighting
+	if i + 1 == tabpagenr()
+	    let s .= '%#TabLineSelNr#' . (i + 1)
+	    let s .= '%#TabLineSel# %{MyTabLabel(' . (i + 1) . ')}'
+	else
+	    let s .= '%#TabLineNr#' . (i + 1)
+	    let s .= '%#TabLine# %{MyTabLabel(' . (i + 1) . ')}'
+	endif
+    endfor
+    let s .= '%#TabLineFill#'
+
+    return s
+endfunction
+
+function MyTabLabel(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    " return bufname(buflist[winnr - 1])
+    let label = bufname(buflist[winnr - 1])
+    return fnamemodify(label, ":t")
+endfunction
+
+set tabline=%!MyTabLine()
