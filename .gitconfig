@@ -1,0 +1,29 @@
+[user]
+	email = mu8086@gmail.com
+	name = Luke Yao
+
+# attribute: bold, dim, ul, blink, reverse.
+# color:     normal, black, red, green, yellow, blue, magenta, cyan, white.
+
+[color]
+	diff		= auto
+	status		= auto
+	branch		= auto
+
+[color "diff"]
+	commit		= cyan		bold
+	context		= black		bold
+	frag		= magenta	bold
+	func		= blue		bold
+	meta		= yellow	bold
+	new			= green		bold
+	plain		= white
+	old			= red		bold
+
+[color "branch"]
+	upstream	= yellow	bold
+	current		= green		bold
+	remote		= white		red      bold
+	local		= black		bold
+[core]
+	editor		= vim
