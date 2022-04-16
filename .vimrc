@@ -65,8 +65,6 @@ autocmd BufReadPost *
 endif
 
 
-
-
 "==============================
 
 " Vim color file
